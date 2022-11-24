@@ -1,0 +1,19 @@
+b = int(input("Enter the initial balance: "))
+while True:
+  x,y = input("Transaction type and amount ('done 0' to exit): ").split()
+  if x=="done" and y=="0":
+    break
+  if x in "DW" and y.isnumeric():
+    y=int(y)
+    if x=="D":
+      b+=y
+      print("Deposit = %d THB, current balance = %d THB."%(y,b))
+    else:
+      if y<=b:
+        b-=y
+        print("Withdrawal = %d THB, current balance = %d THB."%(y,b))
+      else:
+        print("Invalid transaction!")
+  else:
+    print("Invalid transaction!")
+print("Current balance = %d THB"%b)
