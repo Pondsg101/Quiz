@@ -1,0 +1,21 @@
+b = 100
+while True:
+  x,y = input("Command: ").split()
+  if x=="done" and y=="0":
+    break
+  if x in "PR" and y.isnumeric():
+    y=int(y)
+    if x=="P":
+      y//=50
+      b+=y
+      print("You earned %d points"%y)
+      print("Your accumulated points = %d points"%b)
+    else: #R
+      if y<=b:
+        b-=y
+        print("You redeemed %d points"%y)
+        print("Your accumulated points = %d points"%b)
+      else:
+        print("Not enough points")
+  else:
+    print("Invalid command")
