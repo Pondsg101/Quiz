@@ -1,0 +1,17 @@
+num=[]
+while True:
+  n = input("Input: ")
+  if n=="done":
+    break
+  try:
+    n = int(n)
+    num.append(n)
+  except:
+    print("Invalid input")
+if len(num)>=3:
+  num=sorted(num)
+  max=num[-1]+num[-2]+num[-3]
+  min=num[0]+num[1]+num[2]
+  print("The highest and the smallest sum are %d and %d"%(max,min))
+else:
+  print("Not enough inputs")
