@@ -1,0 +1,28 @@
+from operator import itemgetter
+
+def print_sorted(dict):
+  for key,value in sorted(dict.items(),key=itemgetter(1),reverse=True):
+    if value==max(dict.values()):
+      print("%s \t %d \t %s"%(key,value,"Gold"))
+    elif value>(sum(dict.values())/len(dict.values())):
+      print("%s \t %d \t %s"%(key,value,"Silver"))
+
+students={}
+while True:
+  n=input("Enter student name and score: ")
+  if n=="done":
+    break
+  name,score=n.split()
+  if score.isnumeric():
+    score=int(score)
+    if name not in students:
+      students[name]=score
+    else:
+      print("Duplicated name!")
+  else:
+    print("Invalid input")
+print("List: ")
+if len(students)==0:
+  print("> empty list!")
+else:
+  print_sorted(students)
