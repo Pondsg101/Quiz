@@ -1,0 +1,18 @@
+sport=[]
+student=[]
+while True:
+  x = input("who plays what? ")
+  if x=="done":
+    break
+  name,sp = x.split()
+  sps = sp.split(",")
+  for i in sps:
+    if i not in sport:
+      sport.append(i)
+  student.append([name,sps])
+for i in sport:
+  sublist=[]
+  for j in student:
+    if i in j[1]:
+      sublist.append(j[0])
+  print(i,"is played by",sublist)
