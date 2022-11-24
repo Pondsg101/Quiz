@@ -1,0 +1,23 @@
+from operator import itemgetter
+
+def print_sorted(dict):
+  for key,value in sorted(dict.items(),key=itemgetter(1),reverse=True):
+    print("%s \t %d"%(key,value))
+
+students={}
+while True:
+  name,score=input("Enter student name and score: ").split()
+  if name=="end" and score=="0":
+    break
+  score=int(score)
+  if score<0 or score>100:
+    print("Invalid score!")
+  elif name not in students:
+    students[name]=score
+  else:
+    print("Duplicated name!")
+print("List: ")
+if len(students)==0:
+  print("> empty list!")
+else:
+  print_sorted(students)
