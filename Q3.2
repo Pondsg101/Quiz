@@ -1,0 +1,19 @@
+vote_dict={}
+while True:
+  vote = input("Input: ")
+  if vote=="done":
+    break
+  try:
+    vote=int(vote)
+    if vote<=0 or vote>1000:
+      print("Error")
+    else:
+      if vote not in vote_dict:
+        vote_dict[vote]=1
+      else:
+        vote_dict[vote]+=1
+  except:
+    print("Error")
+print("----Summary----")
+for key in sorted(vote_dict.keys()):
+  print(key," ",vote_dict[key])
