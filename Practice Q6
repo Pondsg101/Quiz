@@ -1,0 +1,27 @@
+def print_sorted(dict):
+  for key,value in sorted(dict.items()):
+    print("%s \t %d"%(key,value))
+  num=len(dict)
+  avg=sum(dict.values())/len(dict)
+  print("There are %d student(s). The average score is %.2f points"%(num,avg))
+
+students={}
+while True:
+  ID,score=input("Enter student ID and score: ").split()
+  if ID=="done" and score=="0":
+    break
+  if ID.isnumeric() and len(ID)==4:
+    score=int(score)
+    if score<0 or score>100:
+      print("Invalid score!")
+    elif ID not in students:
+      students[ID]=score
+    else:
+      print("The ID is already recorded!")
+  else:
+    print("Invalid ID format!")
+print("List: ")
+if len(students)==0:
+  print("> empty list!")
+else:
+  print_sorted(students)
