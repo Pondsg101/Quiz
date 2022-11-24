@@ -1,0 +1,30 @@
+from operator import itemgetter
+
+def print_sorted(list):
+  for i in sorted(list,key=itemgetter(2),reverse=True):
+    print("%s \t %s \t %.2f"%(i[0],i[1],i[2]))
+
+program={'ce':0,'che':0,'ec':0,'ie':0,'me':0}
+students=[]
+while True:
+  x=input("Enter student name and score: ")
+  if x=="done":
+    break
+  name,pro,score=x.split()
+  score=float(score)
+  if score<0 or score>4:
+    print("Error!")
+  elif pro not in ['ce','che','ec','ie','me']:
+    print("Error!")
+  else:
+    program[pro]+=1
+    students.append([name,pro,score])
+
+print("----Summary----")
+for key in program:
+  print(key,"=",program[key])
+print("List: ")
+if len(students)==0:
+  print("The list is empty.")
+else:
+  print_sorted(students)
