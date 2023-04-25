@@ -1,0 +1,61 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.util.Random;
+
+public class KeyboardGame extends JPanel implements ActionListener, KeyListener{
+	char displayChar = 'A';
+	char response = '?';
+	int score = 0;
+	Font font = new Font("SAN-SERIF",Font.BOLD,52);
+	Timer timer = new Timer(1000,this);
+	
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.setColor(Color.BLACK);
+		g.setFont(font);
+		g.drawString("Letter: " + displayChar, 75, 75);
+		FontMetrics fm = g.getFontMetrics(font);
+		int width = fm.stringWidth("You type ");
+		g.drawString("You type ", 75, 150);
+		g.setColor(Color.BLUE);
+		g.drawString(""+response, 75 + width , 150);
+		g.setColor(Color.BLACK);
+		g.drawString("Your score = " + score, 75, 225);
+		
+		
+	}
+	
+	KeyboardGame(){
+		this.addKeyListener(this);
+		timer.start();
+		this.setFocusable(true);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+//		System.out.println("Timer Action");
+		displayChar = getRandomChar();
+		this.repaint();
+	}
+	
+	char getRandomChar() {
+		Random random = new Random();
+		return (char)(65 + random.nextInt(26));
+	}
+	
+	public void keyTyped(KeyEvent e) {
+		response = e.getKeyChar();
+		if (response == displayChar) {
+			score += 1;
+		}
+		this.repaint();
+	}
+
+    public void keyPressed(KeyEvent e) {}
+    
+    public void keyReleased(KeyEvent e) {}
+
+
+
+}
