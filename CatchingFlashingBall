@@ -1,0 +1,74 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Random;
+
+public class CatchingFlashingBall extends JPanel{
+	int x ;
+	int y ;
+
+	TimerListener timeL = new TimerListener();
+	Catcher catchB = new Catcher();
+	Timer timer = new Timer(3000,timeL);
+	
+	protected void paintComponent(Graphics g) {
+
+		super.paintComponent(g);
+		this.setBackground(Color.BLACK);
+		g.setColor(Color.YELLOW);
+		g.fillOval(x, y, 20, 20);
+		
+	}
+	
+	CatchingFlashingBall(){
+		this.addMouseListener(catchB);
+		timer.start();
+	}
+	
+	class TimerListener implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			Random random = new Random();
+			x = random.nextInt(getWidth());
+			y = random.nextInt(getHeight());
+			repaint();
+		}
+		
+	}
+	
+	class Catcher implements MouseListener{
+		
+		
+		double calculateDistance(int x1, int y1, int x2, int y2) {
+			return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+		}
+		
+	    public void mouseClicked(MouseEvent e) {}
+	    public void mouseReleased(MouseEvent e) {}
+	    public void mouseEntered(MouseEvent e) {}
+	    public void mouseExited(MouseEvent e) {}
+	    public void mousePressed(MouseEvent e) {
+//	    	System.out.println("mouse press");
+	    	int x1 = e.getX();
+	    	int y1 = e.getY();
+//	    	System.out.println("xc= " + (x+10));
+//	    	System.out.println("yc = " + (y+10));
+//	    	System.out.println("x press = " + x1);
+//	    	System.out.println("y press = " + y1);
+	    	double check = calculateDistance(x + 10 ,y + 10,x1,y1);
+//	    	System.out.println("check = " + check);
+
+	    	if (check < 10) {
+	    		System.out.println("Stop");
+	    		timer.stop();
+	    	}
+	    	
+	    }
+
+
+		
+	}
+
+}
